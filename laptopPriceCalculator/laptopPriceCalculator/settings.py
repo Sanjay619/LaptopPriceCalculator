@@ -56,7 +56,7 @@ ROOT_URLCONF = 'laptopPriceCalculator.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,  'TEMPLATE')],
+        'DIRS': [os.path.join(BASE_DIR,  'Template')],
         'APP_DIRS': True,   
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +77,12 @@ WSGI_APPLICATION = 'laptopPriceCalculator.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'laptoppricingtooldb',
+        'USER': 'root',                        # MySQL username (root for local)
+        'PASSWORD': 'root',                    # Your MySQL password
+        'HOST': '127.0.0.1', 
+        'PORT' : '3306',
     }
 }
 
@@ -128,3 +132,19 @@ MEDIA_ROOT = [os.path.join(BASE_DIR / "media")]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.template': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}

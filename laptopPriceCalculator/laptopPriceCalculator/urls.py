@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 from auth_app.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
      path('', loginView, name="login"),
       path('signup', SignUpView, name= 'signup'),
-  ##     path('/dashboard', DashboardView, name='dashboard'),
+      path('dashboard', DashboardView, name='dashboard'),
 ]+ static(settings.STATIC_URL, document_root= settings.STATIC_ROOT)

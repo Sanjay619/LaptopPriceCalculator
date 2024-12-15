@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        header nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            width: 300px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0 10px;
+            color: #333;
+        }
+
+        .card-text {
+            margin: 0 0 10px;
+            color: #555;
+        }
+
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .buy-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+
+        .calculator {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .calculator label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        .calculator input, .calculator select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .calculator button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Laptop Price Calculator</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Laptops</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        {% for laptop in laptops %}
+        <div class="card">
+            <img src="{{ laptop.image_url }}" alt="{{ laptop.brand }} {{ laptop.model }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ laptop.brand }} {{ laptop.model }}</h5>
+                <p class="card-text">Processor: {{ laptop.processor }}</p>
+                <p class="card-text">RAM: {{ laptop.ram }} GB</p>
+                <p class="card-text">Storage: {{ laptop.storage }} GB</p>
+                <p class="price">Price: ${{ laptop.price }}</p>
+                <a href="#" class="buy-button">Buy Now</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="calculator">
+        <h2>Calculate Your Desired Laptop Price</h2>
+        <form action="/calculate/" method="post">
+            <label for="processor">Processor</label>
+            <select name="processor" id="processor">
+                <option value="i3">Intel i3</option>
+                <option value="i5">Intel i5</option>
+                <option value="i7">Intel i7</option>
+                <option value="ryzen5">AMD Ryzen 5</option>
+                <option value="m1">Apple M1</option>
+            </select>
+
+            <label for="ram">RAM (GB)</label>
+            <input type="number" name="ram" id="ram" min="4" max="64" step="4">
+
+            <label for="storage">Storage (GB)</label>
+            <input type="number" name="storage" id="storage" min="128" max="2048" step="128">
+
+            <button type="submit">Calculate Price</button>
+        </form>
+    </div>
+</body>
+</html>
